@@ -2,91 +2,45 @@
   <main class="posts-listing col-lg-8"> 
     <div class="container">
       <div class="row">
+
         <!-- post -->
-        <div class="post col-xl-6">
-          <div class="post-thumbnail"><a href="{{ route('posts.show') }}"><img src="https://source.unsplash.com/pduutGbL2-M" alt="..." class="img-fluid"></a></div>
-          <div class="post-details">
-            <div class="post-meta d-flex justify-content-between">
-              <div class="date meta-last">20 May | 2016</div>
-              <div class="category"><a href="#">Business</a></div>
-            </div><a href="{{ route('posts.show') }}">
-              <h3 class="h4">Alberto Savoia Can Teach You About Interior</h3></a>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-            <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="https://avatars.dicebear.com/api/avataaars/Anna.svg?mood[]=happy" alt="..." class="img-fluid"></div>
-                <div class="title"><span>Anna Doe</span></div></a>
-              <div class="date"><i class="far fa-clock"></i> 2 months ago</div>
-              <div class="comments meta-last"><i class="far fa-comments"></i>12</div>
-            </footer>
-          </div>
-        </div>
-        <!-- post             -->
-        <div class="post col-xl-6">
-          <div class="post-thumbnail"><a href="{{ route('posts.show') }}"><img src="https://source.unsplash.com/0LvgvMjomnk" alt="..." class="img-fluid"></a></div>
-          <div class="post-details">
-            <div class="post-meta d-flex justify-content-between">
-              <div class="date meta-last">20 May | 2016</div>
-              <div class="category"><a href="#">Business</a></div>
-            </div><a href="{{ route('posts.show') }}">
-              <h3 class="h4">Alberto Savoia Can Teach You About Interior</h3></a>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-            <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="https://avatars.dicebear.com/api/avataaars/Richard.svg?mood[]=happy" alt="..." class="img-fluid"></div>
-                <div class="title"><span>Richard Doe</span></div></a>
-              <div class="date"><i class="far fa-clock"></i> 2 months ago</div>
-              <div class="comments meta-last"><i class="far fa-comments"></i>12</div>
+        @forelse ($posts as $post)
+          <div class="post col-xl-6">
+            <div class="post-thumbnail">
+              <a href="{{ route('posts.show', $post->slug) }}"><img src="{{ $post->cover_image }}" alt="..." class="img-fluid"></a>
+            </div>
+            <div class="post-details">
+              <div class="post-meta d-flex justify-content-between">
+                <div class="date meta-last">{{ $post->created_at->diffForHumans() }}</div>
+                <div class="category">
+                  @foreach ($post->categories as $category)
+                    <a href="#" style="color: {{ $category->color }}">{{ $category->name }}</a>
+                  @endforeach                                  
+                </div>
+              </div>
+              <a href="{{ route('posts.show', $post->slug) }}">
+                <h3 class="h4">{{ $post->title }}</h3>
+              </a>
+              <p class="text-muted">{{ $post->subtitle }}</p>
+              <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="avatar"><img src="{{ $post->owner->avatar_path }}" alt="User Avatar" class="img-fluid"></div>
+                  <div class="title"><span>{{ $post->name }}</span></div></a>
+                <div class="date"><i class="far fa-eye"></i> {{ $post->visits_count }}</div>
+                <div class="comments meta-last"><i class="far fa-comments"></i>{{ $post->comments_count }}</div>
+              </footer>
             </div>
           </div>
+        @empty 
+        <div class="post col-xl-12">
+          <h4 class="text-muted">Rien par ici !</h4>
         </div>
-        <!-- post             -->
-        <div class="post col-xl-6">
-          <div class="post-thumbnail"><a href="{{ route('posts.show') }}"><img src="https://source.unsplash.com/Zp1wD159mkI" alt="..." class="img-fluid"></a></div>
-          <div class="post-details">
-            <div class="post-meta d-flex justify-content-between">
-              <div class="date meta-last">20 May | 2016</div>
-              <div class="category"><a href="#">Business</a></div>
-            </div><a href="{{ route('posts.show') }}">
-              <h3 class="h4">Alberto Savoia Can Teach You About Interior</h3></a>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-            <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="https://avatars.dicebear.com/api/avataaars/Anna.svg?mood[]=happy" alt="..." class="img-fluid"></div>
-                <div class="title"><span>Anna Doe</span></div></a>
-              <div class="date"><i class="far fa-clock"></i> 2 months ago</div>
-              <div class="comments meta-last"><i class="far fa-comments"></i>12</div>
-            </div>
-          </div>
-        </div>
-        <!-- post -->
-        <div class="post col-xl-6">
-          <div class="post-thumbnail"><a href="{{ route('posts.show') }}"><img src="https://source.unsplash.com/mjeQon0Mh_Q" alt="..." class="img-fluid"></a></div>
-          <div class="post-details">
-            <div class="post-meta d-flex justify-content-between">
-              <div class="date meta-last">20 May | 2016</div>
-              <div class="category"><a href="#">Business</a></div>
-            </div>
-            <a href="{{ route('posts.show') }}">
-              <h3 class="h4">Alberto Savoia Can Teach You About Interior</h3>
-            </a>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-            <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="https://avatars.dicebear.com/api/avataaars/Max.svg?mood[]=happy" alt="..." class="img-fluid"></div>
-                <div class="title"><span>Max Doe</span></div></a>
-              <div class="date"><i class="far fa-clock"></i> 2 months ago</div>
-              <div class="comments meta-last"><i class="far fa-comments"></i>12</div>
-            </div>
-          </div>
-        </div>
+        @endforelse        
       </div>
+
       <!-- Pagination -->
-      <nav aria-label="Page navigation example">
-        <ul class="pagination pagination-template d-flex justify-content-center">
-          <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
-          <li class="page-item"><a href="#" class="page-link active">1</a></li>
-          <li class="page-item"><a href="#" class="page-link">2</a></li>
-          <li class="page-item"><a href="#" class="page-link">3</a></li>
-          <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
-        </ul>
-      </nav>
+      <div class="d-flex justify-content-center">
+        {{ $posts->links() }}
+      </div>
     </div>
   </main>
 

@@ -28,7 +28,7 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item"><a href="{{ route('welcome') }}" class="nav-link {{  request()->routeIs('welcome') ? 'active' : '' }}">Home</a>
             </li>
-            <li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link {{ request()->routeIs('posts.index') ? 'active' : '' }}">Blog</a>
+            <li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link {{ request()->routeIs('posts.*') ? 'active' : '' }}">Blog</a>
             </li>
             <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
             </li>

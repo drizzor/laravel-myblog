@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 /** Posts Routes */
 Route::get('/posts', 'PostsController@index')->name('posts.index');
-Route::get('/posts/show', 'PostsController@show')->name('posts.show');
+Route::get('/posts/{post:slug}', 'PostsController@show')->name('posts.show');
 
 /** Contact Routes */
 Route::get('/contact', function () {

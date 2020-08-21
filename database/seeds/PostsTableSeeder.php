@@ -25,9 +25,8 @@ class PostsTableSeeder extends Seeder
                 'title' => $faker->words(5, true), // true pour forcer l'envoi d'un string et non un array (par défaut). Evite de faire planter le seed car je souhaite avoir un simple string
                 'slug' => $faker->slug,
                 'subtitle' => $faker->words(13, true),
-                'body' => $faker->text,
-                'cover_image' => 'https://source.unsplash.com/random/' . $img_w . 'x' . $img_h,
-                'replies_count' => rand(0, 20),
+                'body' => $faker->sentences(rand(10, 200), true),
+                'cover_image' => 'https://source.unsplash.com/' . $img_w . 'x' . $img_h . '/?technology',
                 'visits_count' => rand(1, 200)
             ])->categories()->attach([
                 Category::pluck('id')->random()
