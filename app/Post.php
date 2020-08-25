@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    // protected $with = ['categories'];
+    // protected $withCount = ['comments'];
+
     protected static function boot()
     {
         parent::boot();

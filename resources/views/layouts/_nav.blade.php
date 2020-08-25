@@ -26,16 +26,46 @@
         <!-- Navbar Menu -->
         <div id="navbarcollapse" class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="{{ route('welcome') }}" class="nav-link {{  request()->routeIs('welcome') ? 'active' : '' }}">Home</a>
+            <li class="nav-item">
+              <a href="{{ route('welcome') }}" class="nav-link {{  request()->routeIs('welcome') ? 'active' : '' }}">Accueil</a>
             </li>
-            <li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link {{ request()->routeIs('posts.*') ? 'active' : '' }}">Blog</a>
+            <li class="nav-item">
+              <a href="{{ route('posts.index') }}" class="nav-link {{ request()->routeIs('posts.*') ? 'active' : '' }}">Blog</a>
             </li>
-            <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
+            <li class="nav-item">
+              <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
             </li>
+
+            @guest
+              <li class="nav-item">
+                  <a class="nav-link {{ request()->routeIs(['login', 'register']) ? 'active' : '' }}" href="{{ route('login') }}">Connexion</a>
+              </li>
+
+              @else
+                  <li class="nav-item dropdown">
+                      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          {{ Auth::user()->name }} <span class="caret"></span>
+                      </a>
+  
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
+                              Déconnexion
+                          </a>
+  
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              @csrf
+                          </form>
+                      </div>
+                  </li>
+              @endguest
+            
+            <div class="navbar-text">
+              <a href="#" class="search-btn"><i class="fas fa-search"></i></a>              
+            </div>
           </ul>
-          <div class="navbar-text">
-            <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
-          </div>
+          
         </div>
       </div>
     </nav>

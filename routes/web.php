@@ -25,3 +25,7 @@ Route::get('/posts/{post:slug}', 'PostsController@show')->name('posts.show');
 Route::get('/contact', function () {
     return view('contact.index');
 })->name('contact');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
