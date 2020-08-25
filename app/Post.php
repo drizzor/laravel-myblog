@@ -2,11 +2,12 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    // protected $with = ['categories'];
+    // protected $with = ['next'];
     // protected $withCount = ['comments'];
 
     protected static function boot()
@@ -39,5 +40,21 @@ class Post extends Model
     public function path()
     {
         return "/posts/" . $this->slug;
+    }
+
+    /**
+     * Next Post
+     */
+    public function next()
+    {
+        return $this->where('id', '>', $this->id)->first();
+    }
+
+    /**
+     * Previous Post
+     */
+    public function previous()
+    {
+        return $this->where('id', '<', $this->id)->orderBy('id', 'desc')->first();
     }
 }
