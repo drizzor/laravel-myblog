@@ -20,9 +20,12 @@
     @yield('style')
   </head>
   <body>
-    @include('layouts._nav')
+    @include('layouts._nav')    
 
     <div class="container">
+
+      @include('components._alert')
+
       <div class="row">
         <!-- Latest Posts -->
         {{ $slot }}

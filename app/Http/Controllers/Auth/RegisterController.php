@@ -67,6 +67,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'avatar_path' => 'https://avatars.dicebear.com/api/avataaars/' . $data['name'] . '.svg',
             'password' => Hash::make($data['password']),
         ]);
     }
